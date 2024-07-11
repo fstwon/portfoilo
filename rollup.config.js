@@ -8,16 +8,17 @@ import postcss from "rollup-plugin-postcss";
 import livereload from "rollup-plugin-livereload";
 import serve from "rollup-plugin-serve";
 import replace from "@rollup/plugin-replace";
+import autoprefixer from "autoprefixer";
 
 const DEV_MODE = {
   PROD: "production",
   DEV: "development"
 }
 
-// module 확장하게되면 cjs, esm 모듈 분리해서 설정해야 함 
-function setRollupConfig() {
-  const extensions = ['.js', '.jsx', '.ts', '.tsx'];
+const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
+// module 확장하게되면 cjs, esm 모듈 분리해서 설정해야 함 
+function setRollupConfig(input, output, format) {
   const devMode = process.env.DEV_MODE; // boolean
 
   const config = {
@@ -44,14 +45,16 @@ function setRollupConfig() {
       !devMode && terser(),
       typescript({ tsconfig: './tsconfig.json'}),
       postcss({
-        plugins: [],
-        minimize: true
+        plugins: [autoprefixer()],
+        minimize: true,
+        extensions: ['.css', '.scss'],
+        sourceMap: true
       }),
       html({
         template: './index.html',
         target: './dist/index.html'
       }),
-      livereload({
+      devMode && livereload({
         watch: 'dist'
       }),
       devMode && serve({
@@ -60,7 +63,7 @@ function setRollupConfig() {
         port: 3000
       }),
       devMode && replace({
-        'process.env.NODE_ENV': process.env.DEV_MODE ? JSON.stringify(DEV_MODE.DEV) : JSON.stringify(DEV_MODE.PROD),
+        'process.env.NODE_ENV': devMode ? JSON.stringify(DEV_MODE.DEV) : JSON.stringify(DEV_MODE.PROD),
         preventAssignment: true
       })
     ],
