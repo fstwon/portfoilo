@@ -1,0 +1,32 @@
+.onboarding_page_text_logo {
+  position: absolute;
+  display: inline-block;
+  top: 17px;
+  left: 24px;
+  width: 118px;
+  &.shrink_logo {
+    animation: shrink_logo 1400ms linear;
+  }
+}
+
+@keyframes shrink_logo {
+  0% {
+    width: 418px;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  25% {
+    width: 314px;
+  }
+  50% {
+    width: 210px;
+  }
+  75% {
+    width: 125px;
+  }
+  100% {
+    top: 14px;
+    left: 24px;
+  }
+}
