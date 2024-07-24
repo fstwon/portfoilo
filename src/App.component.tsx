@@ -12,6 +12,10 @@ function App() {
   const { IS_INIT_RENDER } = useSelector((state: RootState) => state.AppReducer);
   const [isDoneOnboarding, setIsDoneOnboarding] = useState<TIsDoneOnboarding>(() => false)
   const onBoardingTimeoutId = useRef<ReturnType <typeof setTimeout>>()
+  
+  useEffect(() => {
+    console.log(process)
+  }, [])
 
   useEffect(() => {
     if(!IS_INIT_RENDER) {
