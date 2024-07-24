@@ -1,3 +1,5 @@
-.app {
-  
+@import "./styleSheets.styles.scss";
+
+.App {
+  @include fc_1E_FA;
 }
