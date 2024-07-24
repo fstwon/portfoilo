@@ -11,11 +11,13 @@ export default [
     rules: {
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-vars": "error",
+      "react/jsx-uses-react": "error"
     },
-    plugins: {
+    plugins: [
       react,
       tseslint
-    }
+    ],
+    extends: ["eslint:all", "plugin:react/all"]
   },
   { 
     languageOptions: {
