@@ -69,6 +69,10 @@ function setRollupConfig(input, output, format) {
       }),
       svg(),
       svgr(),
+      replace({
+        'process.env.NODE_ENV': devMode ? JSON.stringify(DEV_MODE.DEV) : JSON.stringify(DEV_MODE.PROD),
+        preventAssignment: true
+      }),
       devMode && livereload({
         watch: 'dist'
       }),
@@ -78,10 +82,6 @@ function setRollupConfig(input, output, format) {
         port: 3000,
         historyApiFallback: true
       }),
-      devMode && replace({
-        'process.env.NODE_ENV': devMode ? JSON.stringify(DEV_MODE.DEV) : JSON.stringify(DEV_MODE.PROD),
-        preventAssignment: true
-      })
     ],
   };
 
