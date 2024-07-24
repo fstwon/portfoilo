@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "rootDir": "./",
     "target": "es6",
     "lib": [
       "dom",
@@ -21,7 +22,8 @@
     "allowUmdGlobalAccess": true
   },
   "include": [
-    "src/**/*"
+    "**/*",
+    "src/custom_ts/svg.custom.d.ts"
   ],
   "exclude": [
     "node_modules",
