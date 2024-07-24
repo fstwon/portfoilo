@@ -1,0 +1,8 @@
+@import "../../../../styleSheets.styles.scss";
+
+.header_logo_link {
+  display: inline-block;
+  width: 118px;
+  padding: 14px 0;
+  @include fc_1E_FA;
+}

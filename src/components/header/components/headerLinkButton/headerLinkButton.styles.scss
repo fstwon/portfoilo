@@ -1,0 +1,9 @@
+@import "../../../../styleSheets.styles.scss";
+
+.header_link_button {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 800;
+  padding: 14px 18px;
+  @include fc_1E_FA;
+}

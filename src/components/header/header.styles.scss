@@ -1,0 +1,9 @@
+@import "../../styleSheets.styles.scss";
+
+.header_container {
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  border-bottom: 1px solid;
+  @include lc_CB_FA;
+}
