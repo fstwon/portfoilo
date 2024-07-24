@@ -5,15 +5,18 @@ import terser from "@rollup/plugin-terser";
 import html from "rollup-plugin-generate-html-template"
 import typescript from "@rollup/plugin-typescript";
 import postcss from "rollup-plugin-postcss";
+import cssimport from "postcss-import";
 import livereload from "rollup-plugin-livereload";
 import serve from "rollup-plugin-serve";
 import replace from "@rollup/plugin-replace";
 import autoprefixer from "autoprefixer";
+import svg from "rollup-plugin-svg";
+import svgr from "@svgr/rollup";
 
 const DEV_MODE = {
   PROD: "production",
   DEV: "development"
-}
+};
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
@@ -32,35 +35,48 @@ function setRollupConfig(input, output, format) {
       include: '*/**',
       exclude: 'node_modules/**'
     },
+    external: ['scss'],
     plugins: [
       babel({
         babelHelpers: 'runtime',
         extensions,
         exclude: 'node_modules/**',
       }),
-      nodeResolve({extensions}),
+      nodeResolve({
+        extensions
+      }),
       commonjs({
         include: 'node_modules/**'
       }),
       !devMode && terser(),
-      typescript({ tsconfig: './tsconfig.json'}),
+      typescript({ 
+        tsconfig: './tsconfig.json'
+      }),
       postcss({
-        plugins: [autoprefixer()],
-        minimize: true,
         extensions: ['.css', '.scss'],
-        sourceMap: true
+        use: ['sass'],
+        extract: true,
+        sourceMap: true,
+        minimize: true,
+        plugins: [
+          autoprefixer(),
+          cssimport()
+        ]
       }),
       html({
         template: './index.html',
         target: './dist/index.html'
       }),
+      svg(),
+      svgr(),
       devMode && livereload({
         watch: 'dist'
       }),
       devMode && serve({
         open: true,
         contentBase: ['dist'],
-        port: 3000
+        port: 3000,
+        historyApiFallback: true
       }),
       devMode && replace({
         'process.env.NODE_ENV': devMode ? JSON.stringify(DEV_MODE.DEV) : JSON.stringify(DEV_MODE.PROD),
