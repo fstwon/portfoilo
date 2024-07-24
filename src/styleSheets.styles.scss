@@ -1,0 +1,37 @@
+// 폰트 컬러
+@mixin fc_1E_FA {
+  color: #1E1E1E;
+  @at-root .darkmode {
+    color: #FAFAFA;
+  }
+}
+
+@mixin fc_FA_1E {
+  color: #FAFAFA;
+  @at-root .darkmode {
+    color: #1E1E1E;
+  }
+}
+
+// 백그라운드 컬러
+@mixin bc_FA_1E {
+  background-color: #FAFAFA;
+  @at-root .darkmode {
+    background-color: #1E1E1E;
+  }
+}
+@mixin bc_transparent {
+  background-color: transparent;
+}
+
+@mixin bc_1E {
+  background-color: #1E1E1E;
+}
+
+// 보더 컬러
+@mixin lc_CB_FA {
+  border-color: #CBD0D8;
+  @at-root .darkmode {
+    border-color: #FAFAFA;
+  }
+}
