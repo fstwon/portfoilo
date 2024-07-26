@@ -1,9 +1,16 @@
 @import "../../../../styleSheets.styles.scss";
 
-.header_link_button {
-  display: inline-block;
-  font-size: 20px;
-  font-weight: 800;
-  padding: 14px 18px;
-  @include fc_1E_FA;
+.header_menu_link_button {
+  &:hover {
+    transition: color 300ms linear;
+    @include fc_FA_1E;
+  }
+
+  &::before {
+    @include bc_6C;
+  }
+  &.active {
+    @include bc_6C;
+    @include fc_FA_1E;
+  }
 }

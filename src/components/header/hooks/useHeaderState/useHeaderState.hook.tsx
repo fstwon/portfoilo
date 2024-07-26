@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { BlogMainPage } from "../../../../pages/blog/blog.main.page";
-import { MainPage } from "../../../../pages/main/main.page";
+import { IntroductionPage } from "../../../../pages/home/pages/introduction/introduction.page";
 import { ProjectMainPage } from "../../../../pages/project/project.main.page";
 import { HomePage } from "../../../../pages/home/Home.page";
 
-interface THeaderLinkRoutes {
+interface IHeaderLinkRoutes {
   HOME: string;
   BLOG: string;
   PROJECT: string;
 };
 
-const HEADER_LINK_ROUTES: THeaderLinkRoutes = {
+const HEADER_LINK_ROUTES: IHeaderLinkRoutes = {
   HOME: 'home',
   BLOG: 'blog',
   PROJECT: 'project'
@@ -22,27 +22,27 @@ const elementList: {[key: string]: React.ReactElement} = {
   project: <ProjectMainPage />
 };
 
-export interface ILink {
-  id: number;
+export interface IHeaderMenu {
+  id: number,
   linkName: string;
-  path: string;
+  linkPath: string;
   element: React.ReactElement
 }
 
 export function useHeaderState() {
-  const [linkList] = useState<ILink[]>(() => {
+  const [linkList] = useState<IHeaderMenu[]>(() => {
     const linkNameList = Object.values(HEADER_LINK_ROUTES);
     const linkList = linkNameList.map((linkName, index) => {
-      let path = `/${linkName}`;
+      let linkPath = `/${linkName}`;
 
       if(linkName === HEADER_LINK_ROUTES.HOME) {
-        path = '/'
+        linkPath = '*'
       }
 
       return {
         id: index,
         linkName: linkName.toUpperCase(),
-        path,
+        linkPath,
         element: elementList[linkName]
       }
     })
