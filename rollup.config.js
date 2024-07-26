@@ -12,18 +12,12 @@ import replace from "@rollup/plugin-replace";
 import autoprefixer from "autoprefixer";
 import svg from "rollup-plugin-svg";
 import svgr from "@svgr/rollup";
-
-const DEV_MODE = {
-  PROD: "production",
-  DEV: "development"
-};
+import postcssUrl from "postcss-url";
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 // module 확장하게되면 cjs, esm 모듈 분리해서 설정해야 함 
 function setRollupConfig(input, output, format) {
-  const devMode = process.env.DEV_MODE; // boolean
-
   const config = {
     input: './src/index.tsx',
     output: {
@@ -48,7 +42,7 @@ function setRollupConfig(input, output, format) {
       commonjs({
         include: 'node_modules/**'
       }),
-      !devMode && terser(),
+      terser(),
       typescript({ 
         tsconfig: './tsconfig.json'
       }),
@@ -60,7 +54,10 @@ function setRollupConfig(input, output, format) {
         minimize: true,
         plugins: [
           autoprefixer(),
-          cssimport()
+          cssimport(),
+          postcssUrl({
+            url: "inline",
+          })
         ]
       }),
       html({
@@ -70,13 +67,13 @@ function setRollupConfig(input, output, format) {
       svg(),
       svgr(),
       replace({
-        'process.env.NODE_ENV': devMode ? JSON.stringify(DEV_MODE.DEV) : JSON.stringify(DEV_MODE.PROD),
+        'process.env.NODE_ENV': JSON.stringify('production'),
         preventAssignment: true
       }),
-      devMode && livereload({
+      livereload({
         watch: 'dist'
       }),
-      devMode && serve({
+      serve({
         open: true,
         contentBase: ['dist'],
         port: 3000,
