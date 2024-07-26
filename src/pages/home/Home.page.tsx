@@ -1,7 +1,12 @@
+import { HomeRouter } from "./components/homeRouter/HomeRouter.component";
+import { HomeSubHeader } from "./components/subHeader/HomeSubHeader.component";
+import "./home.styles.scss";
+
 export function HomePage() {
   return (
     <div className="home_page_container" >
-      홈 페이지입니다.
+      <HomeSubHeader />
+      <HomeRouter />
     </div>
   )
 };
