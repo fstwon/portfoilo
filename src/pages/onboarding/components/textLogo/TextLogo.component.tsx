@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { SoTextLogo } from "../../../../resource/images/text_logo/TextLogo";
+import { SoTextLogo } from "../../../../resource/svg/text_logo/TextLogo";
 import { RootState } from "../../../../redux/Root.redux";
 import classNames from "classnames"
 import "./textLogo.styles.scss";
