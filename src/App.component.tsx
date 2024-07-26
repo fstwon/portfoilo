@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { OnboardingPage } from "./pages/onboarding/Onboarding.page";
-import { MainPage } from "./pages/main/main.page";
 import { RootState } from "./redux/Root.redux";
-import { TextLogo } from "./pages/onboarding/components/textLogo/TextLogo.component";
 import { useEffect, useRef, useState } from "react";
+import { MainRouter } from "./components/mainRouter/MainRouter.component";
+import { Header } from "./components/header/Header.component";
 import "./app.styles.scss";
 
 type TIsDoneOnboarding = boolean;
@@ -12,10 +12,6 @@ function App() {
   const { IS_INIT_RENDER } = useSelector((state: RootState) => state.AppReducer);
   const [isDoneOnboarding, setIsDoneOnboarding] = useState<TIsDoneOnboarding>(() => false)
   const onBoardingTimeoutId = useRef<ReturnType <typeof setTimeout>>()
-  
-  useEffect(() => {
-    console.log(process)
-  }, [])
 
   useEffect(() => {
     if(!IS_INIT_RENDER) {
@@ -28,8 +24,9 @@ function App() {
 
   return (
     <div className="App" >
-      {!isDoneOnboarding && <OnboardingPage />}
-      <MainPage />
+      {/* {!isDoneOnboarding && <OnboardingPage />} */}
+      <Header />
+      <MainRouter />
     </div>
   )
 };
