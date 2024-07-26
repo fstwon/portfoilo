@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ONBOARDING_WORD, ONBOARDING_WORD_REG_PATTERN, substringWord } from "../../utils/substringWord/substringWord.util";
-import "./firstWord.styles.scss";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../redux/Root.redux";
 import classNames from "classnames";
-import { SoTextLogo } from "../../../../resource/images/text_logo/TextLogo";
+import "./firstWord.styles.scss";
 
 type TWord = string;
 
